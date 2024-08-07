@@ -1,5 +1,6 @@
-import 'package:document_app/det_memo_view/det_memo_view.dart';
-import 'package:document_app/reg_memo_view/reg_memo_view.dart';
+import 'package:document_app/model/memo.dart';
+import 'package:document_app/view/det_memo_view/det_memo_view.dart';
+import 'package:document_app/view/reg_memo_view/reg_memo_view.dart';
 import 'package:flutter/material.dart';
 
 class LstMemoView extends StatefulWidget {
@@ -11,10 +12,10 @@ class LstMemoView extends StatefulWidget {
 }
 
 class _LstMemoViewState extends State<LstMemoView> {
-  List<String> lstMemos = [];
+  List<Memo> lstMemos = [];
 
   void _incrementCounter() async {
-    final String? newMemo = await Navigator.push(
+    final Memo? newMemo = await Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => RegMemoView(),
@@ -24,23 +25,28 @@ class _LstMemoViewState extends State<LstMemoView> {
       return;
     }
     setState(() {
+      newMemo.id = lstMemos.length;
       lstMemos.add(newMemo);
     });
   }
 
-  void _transitToDetMemoView(String content) async {
-    final String? updMemo = await Navigator.push(
+  void _transitToDetMemoView(int index) async {
+    final Memo? updMemo = await Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => DetMemoView(content: content),
+        builder: (context) => DetMemoView(recMemo: lstMemos[index]),
       ),
     );
     if (updMemo == null) {
       return;
     }
     setState(() {
-      lstMemos =
-          lstMemos.map((memo) => memo == content ? updMemo : memo).toList();
+      lstMemos = lstMemos.map((memo) {
+        if (memo.id == updMemo.id) {
+          return updMemo;
+        }
+        return memo;
+      }).toList();
     });
   }
 
@@ -55,8 +61,9 @@ class _LstMemoViewState extends State<LstMemoView> {
         itemBuilder: (context, index) {
           return Card(
             child: ListTile(
-              title: Text(lstMemos[index]),
-              onTap: () => _transitToDetMemoView(lstMemos[index]),
+              title: Text(lstMemos[index].content),
+              subtitle: Text(lstMemos[index].updatedAt.toString()),
+              onTap: () => _transitToDetMemoView(lstMemos[index].id),
             ),
           );
         },

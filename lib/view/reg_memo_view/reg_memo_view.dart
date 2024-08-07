@@ -1,3 +1,4 @@
+import 'package:document_app/model/memo.dart';
 import 'package:flutter/material.dart';
 
 class RegMemoView extends StatelessWidget {
@@ -22,7 +23,13 @@ class RegMemoView extends StatelessWidget {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                Navigator.pop(context, _controller.text);
+                Memo newMemo = Memo(
+                  id: 0,
+                  content: _controller.text,
+                  createdAt: DateTime.now(),
+                  updatedAt: DateTime.now(),
+                );
+                Navigator.pop(context, newMemo);
               },
               child: const Text('登録'),
             ),
