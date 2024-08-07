@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "993003432294",
+    "project_id": "document-app-e23ff",
+    "storage_bucket": "document-app-e23ff.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:993003432294:android:817c434dbb61e469b480a7",
+        "android_client_info": {
+          "package_name": "com.yaeok"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADD2Rvly7mkvPJEGKUHWbC5_Bkcu-KuRs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
